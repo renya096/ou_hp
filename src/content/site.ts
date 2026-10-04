@@ -13,16 +13,31 @@ export const site = {
   taglineSub: "急な現場、夜間工事、1名だけの作業。熊本県全域に24時間365日、営業時間内は原則30分以内に一次回答。82名の若い隊が、仕組みで翌日に間に合わせます。",
   founded: "2025年8月",
   foundedISO: "2025-08",
-  licenseStarted: "2025年12月",
+  licenseStarted: "2025年11月",
   license: {
     authority: "熊本県公安委員会",
     number: "第93000308号",
     label: "熊本県公安委員会認定 第93000308号",
-    // 標識（改正警備業法）の詳細は後日差し替え
-    certifiedOn: "",
-    validUntil: "",
+    // 標識（警備業法第6条・別記様式第2号）の記載事項。認定の有効期間は5年
+    certifiedOn: "令和7年11月12日",
+    certifiedOnISO: "2025-11-12",
+    validFrom: "令和7年11月12日",
+    validUntil: "令和12年11月11日",
+    validUntilISO: "2030-11-11",
+    /** 標識の所在地欄（主たる営業所）。様式どおり漢数字表記 */
+    addressOnSign: "熊本市中央区本荘六丁目10－15",
     categories: ["2号（交通誘導警備・雑踏警備）", "4号（身辺警備）"],
   },
+  /** 加入団体 */
+  memberships: [
+    { name: "一般社団法人熊本県警備業協会", url: "https://www.kssa.or.jp/" },
+    { name: "熊本県セキュリティ協同組合", url: "https://kumamoto-security.jp/" },
+  ],
+  /** 待機所・拠点 */
+  bases: [
+    { name: "本社（熊本市中央区本荘）", role: "主たる営業所" },
+    { name: "八代待機所（八代市）", role: "県南・令和8年熊本地震の復旧工事エリアへの配置拠点。休憩・待機に使用" },
+  ],
   address: {
     postal: "860-0811",
     region: "熊本県",

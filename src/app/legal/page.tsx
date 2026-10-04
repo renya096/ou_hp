@@ -5,6 +5,7 @@ import { PageHero, Breadcrumbs, ContactBand } from "@/components/ui/blocks";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { site } from "@/content/site";
+import { Hyoshiki } from "@/components/site/Hyoshiki";
 
 const path = "/legal";
 const title = "警備業に関する表示（標識）";
@@ -19,9 +20,6 @@ export const metadata: Metadata = {
 
 const crumbs = [{ href: path, label: "警備業に関する表示" }];
 
-function Pending() {
-  return <span className="inline-flex items-center gap-1 rounded-sm border border-dashed border-line px-2 py-0.5 text-[12.5px] text-muted">掲載予定</span>;
-}
 
 export default function LegalPage() {
   return (
@@ -31,22 +29,20 @@ export default function LegalPage() {
       <PageHero
         eyebrow="Legal"
         title="警備業に関する表示"
-        lead="警備業法に基づき、認定を受けた警備業者としての標識事項を表示します。認定年月日・有効期間は標識の交付内容を確認のうえ掲載します。"
+        lead="警備業法第6条に基づき、認定を受けた警備業者としての標識をインターネット上に掲示します。あわせて業務区分・指導教育責任者・契約前の書面交付についてご案内します。"
       />
 
-      <Section eyebrow="Sign" title="標識">
-        <DefList items={[
-          { term: "警備業者の名称", desc: site.name },
-          { term: "主たる営業所", desc: <span className="num">{site.address.full}</span> },
-          { term: "認定をした公安委員会", desc: site.license.authority },
-          { term: "認定番号", desc: <span className="num">{site.license.number}</span> },
-          { term: "認定年月日", desc: site.license.certifiedOn ? <span className="num">{site.license.certifiedOn}</span> : <Pending /> },
-          { term: "認定の有効期間", desc: site.license.validUntil ? <span className="num">{site.license.validUntil}</span> : <Pending /> },
-          { term: "警備業務の区分", desc: <ul className="grid gap-1">{site.license.categories.map((c) => <li key={c}>{c}</li>)}</ul> },
-          { term: "代表者", desc: site.representative },
-          { term: "指導教育責任者", desc: <span className="num">2号業務 {site.stats.instructors}名（年内＋{site.stats.instructorsPlanned}名）／4号業務 選任済み</span> },
-        ]} />
-        <p className="mt-4 text-[13px] text-muted">※ 認定年月日・有効期間は、標識の記載内容を確認のうえ掲載します。本社営業所にも標識を掲示しています。</p>
+      <Section eyebrow="Sign — 警備業法第6条・別記様式第2号" title="標識">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,640px)_1fr] lg:items-start">
+          <Hyoshiki />
+          <DefList items={[
+            { term: "警備業務の区分", desc: <ul className="grid gap-1">{site.license.categories.map((c) => <li key={c}>{c}</li>)}</ul> },
+            { term: "認定年月日", desc: <span className="num">{site.license.certifiedOn}</span> },
+            { term: "代表者", desc: site.representative },
+            { term: "指導教育責任者", desc: <span className="num">2号業務 {site.stats.instructors}名（年内＋{site.stats.instructorsPlanned}名）／4号業務 選任済み</span> },
+            { term: "加入団体", desc: <ul className="grid gap-1">{site.memberships.map((m) => <li key={m.name}>{m.name}</li>)}</ul> },
+          ]} />
+        </div>
       </Section>
 
       <Section tone="surface" eyebrow="Before contract" title="契約前の書面によるご説明（警備業法第19条）">

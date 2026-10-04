@@ -4,12 +4,12 @@ import { Section, Button, Note, Chip } from "@/components/ui/primitives";
 import { PageHero, Breadcrumbs, ContactBand } from "@/components/ui/blocks";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
-import { works, type Work } from "@/content/works";
+import { works, disasterResponse, type Work } from "@/content/works";
 import { site } from "@/content/site";
 
 const path = "/works";
-const title = "実績・対応事例｜災害対応・道路規制・イベント・商業施設";
-const description = "株式会社OU警備保障の警備実績。令和8年熊本地震の緊急警備、国道の夜間規制、建築現場の長期配置、祭り・花火大会の雑踏警備、商業施設の駐車場誘導など。発注者を特定できない形で掲載しています。";
+const title = "実績・対応事例｜令和8年熊本地震の復旧工事・道路規制・住宅メーカー・イベント";
+const description = "株式会社OU警備保障の警備実績。令和8年熊本地震の復旧工事（緊急のガス・水道・電気工事の交通規制、解体ヤードの駐車場警備（宇土市）、被災箇所の24時間警戒）、国道の夜間規制、住宅メーカーの新築現場、祭り・花火大会の雑踏警備、商業施設の駐車場誘導、地域の安全教育など。発注者を特定しない形で掲載。";
 
 export const metadata: Metadata = {
   title,
@@ -22,10 +22,12 @@ const crumbs = [{ href: "/services", label: "警備サービス" }, { href: path
 
 /** カテゴリの表示順（災害対応は別枠で最上段に出すため除外） */
 const categoryOrder: Array<{ key: Work["category"]; lead: string }> = [
-  { key: "道路・工事", lead: "建築・土木・舗装の現場と、国道・高速道路の規制業務。" },
+  { key: "道路・工事", lead: "土木・舗装の現場と、国道・高速道路の規制業務。" },
+  { key: "建築・住宅", lead: "住宅メーカー・工務店の新築現場。少量・スポットのご依頼にも対応。" },
   { key: "イベント", lead: "祭り・花火大会・マラソンなど、人が集まる場所の雑踏警備。" },
   { key: "商業施設", lead: "駐車場誘導と、清掃（OUクリーンサービス）との同時発注。" },
   { key: "身辺警護", lead: `${site.protectionStart}に開始した身辺警護（4号）の事例。` },
+  { key: "地域・教育", lead: "安全教育・接遇研修など、地域の安全活動。" },
 ];
 
 function WorkCard({ w, featured = false }: { w: Work; featured?: boolean }) {
@@ -39,6 +41,7 @@ function WorkCard({ w, featured = false }: { w: Work; featured?: boolean }) {
       <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px]">
         <div className="flex gap-1.5"><dt className="text-muted">発注者</dt><dd className="font-semibold text-ink">{w.client}</dd></div>
         <div className="flex gap-1.5"><dt className="text-muted">規模</dt><dd className="num font-semibold text-ink">{w.scale}</dd></div>
+        {w.area && <div className="flex gap-1.5"><dt className="text-muted">地域</dt><dd className="font-semibold text-ink">{w.area}</dd></div>}
       </dl>
       <p className={featured ? "mt-4 max-w-[68ch] text-[15px] leading-[1.9] text-ink" : "mt-3 text-[14px] leading-[1.8] text-muted"}>{w.summary}</p>
       <ul className={featured ? "mt-5 grid gap-2 sm:grid-cols-3" : "mt-4 grid gap-1.5"}>
@@ -74,9 +77,21 @@ export default function WorksPage() {
 
       {/* 災害対応：最上段で大きめに */}
       {disaster.length > 0 && (
-        <Section eyebrow="Disaster response" title="災害対応" lead="2026年7月28日に発生した令和8年熊本地震では、要請のあった地域で発災翌日から隊員を配置しました。復旧・復興に伴う工事の交通誘導・道路規制のご依頼は、引き続き24時間受け付けています。">
+        <Section eyebrow="Disaster response" title={disasterResponse.title} lead={disasterResponse.summary}>
+          <div className="mb-6 grid gap-4 lg:grid-cols-[1fr_1fr]">
+            <Note title="八代待機所を拠点にした配置">{disasterResponse.base}</Note>
+            <div className="rounded-sm border border-line bg-bg p-5">
+              <p className="text-[13px] font-bold text-heading">令和8年熊本地震 関連工事で対応していること</p>
+              <ul className="mt-2 grid gap-1.5 text-[13.5px] leading-[1.7] text-ink">
+                {disasterResponse.points.map((pt) => <li key={pt} className="flex items-start gap-2"><Icon name="check" size={15} className="mt-1 shrink-0 text-accent" />{pt}</li>)}
+              </ul>
+            </div>
+          </div>
           <div className="grid gap-6">
-            {disaster.map((w) => <WorkCard key={w.slug} w={w} featured />)}
+            {disaster.slice(0, 1).map((w) => <WorkCard key={w.slug} w={w} featured />)}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {disaster.slice(1).map((w) => <WorkCard key={w.slug} w={w} />)}
+            </div>
             <div className="flex flex-wrap items-center gap-4">
               <Link href="/news/2026-07-earthquake-response" className="inline-flex items-center gap-1 text-[14px] font-bold text-action">お知らせ：令和8年熊本地震に伴う緊急警備と物資支援プロジェクトについて <Icon name="arrow" size={16} /></Link>
             </div>

@@ -41,7 +41,7 @@ export default function EducationPage() {
       <PageHero
         eyebrow="Education & Quality"
         title="教育・品質体制"
-        lead={`警備の品質は、教育の時間と、現場を見に行く回数で決まると考えています。警備業法に基づく新任教育（20時間以上）と現任教育を自社で行い、指導教育責任者${site.stats.instructors}名（年内＋${site.stats.instructorsPlanned}名）が配置計画と現場指導にあたります。`}
+        lead={`警備の品質は、教育の時間と、現場を見に行く回数で決まると考えています。指導教育責任者1名と交通誘導警備業務検定2級の資格者2名、計3名が配置計画と現場指導にあたり、1人ひとりの隊員を現場で見て育てています。`}
         chips={["新任教育 20時間以上", "現任教育 年1回以上", `指導教育責任者 ${site.stats.instructors}名`, `検定2級 ${site.stats.certified2}名`, "現場巡回"]}
       />
 
@@ -88,7 +88,15 @@ export default function EducationPage() {
         <div className="mt-6"><Link href="/cleaning" className="inline-flex items-center gap-1 text-[14px] font-bold text-action">OUクリーンサービスについて <Icon name="arrow" size={16} /></Link></div>
       </Section>
 
-      <Section tone="surface">
+      <Section tone="surface" eyebrow="Community" title="地域の安全活動" lead="警備で培った誘導の合図・声かけ・危険予知の考え方を、警備員以外の方にもお伝えしています。地域の安全活動の一環として、ご要望に応じて講習形式で行います。">
+        <TwoColumnList
+          left={{ title: "安全教育", icon: "check", items: ["現場での危険予知（KY）の進め方", "歩行者・車両への合図と声かけの基本", "事故が起きやすい時間帯・場所の見方"] }}
+          right={{ title: "駐車場の接遇研修", icon: "car", items: ["来場者への案内・誘導の言葉づかい", "満車時・混雑時の対応と動線の整理", "クレームになりやすい場面の予防"] }}
+        />
+        <p className="mt-4 text-[13.5px] text-muted">講師は指導教育責任者・交通誘導警備業務検定2級の資格者が担当します。実施例は<Link href="/works#community-safety-training" className="underline underline-offset-4">実績・対応事例</Link>をご覧ください。</p>
+      </Section>
+
+      <Section>
         <Note title="教育に関する資料のご提供">
           入札・元請審査などで教育計画書・教育実施記録・資格者一覧が必要な場合は、お問い合わせください。警備業法に基づく書面とあわせてご提示します。
         </Note>

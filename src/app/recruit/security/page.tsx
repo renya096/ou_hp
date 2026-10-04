@@ -132,14 +132,15 @@ export default function RecruitSecurityPage() {
       </Section>
 
       {/* スマホで完結 */}
-      <Section eyebrow="Smartphone" title="出勤も、退勤も、日払いも、スマホで完結" lead="紙のタイムカードも、日報も、会社への電話もありません。LINEのトーク上で、3つのボタンを押すだけです。">
+      <Section eyebrow="Smartphone" title="シフトも、出退勤も、日払いも、スマホで完結" lead="紙のタイムカードも、日報も、会社への電話もありません。隊員用のLINEにあるボタンを押すだけです。">
         <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
           <PhoneMock />
           <ul className="grid gap-3">
             {[
-              { t: "出勤", d: "現場に着いたらLINEで打刻。管制が全員の到着を確認し、遅れている人がいればすぐ連絡します。" },
-              { t: "退勤", d: "作業が終わったらLINEで打刻。その場で帰れます。会社に寄る必要はありません。" },
-              { t: "日払い申請", d: "退勤の流れでそのまま申請。当日中に振り込まれます。" },
+              { t: "シフトを出す", d: "2週間分のシフトを、月初と15日にLINEから提出。4日前までならLINEで変更できます（それ以降は配置が自動で組まれるため、会社に電話で変更）。" },
+              { t: "勤務指示・出発前確認", d: "翌日の現場・集合時間・持ち物がLINEに届きます。出発前にボタンで確認を返すだけ。" },
+              { t: "上番（出勤）・下番（退勤）", d: "現場に着いたら上番、終わったら下番を押す。管制が全員の到着を確認し、遅れている人にはすぐ連絡します。会社に寄る必要はありません。" },
+              { t: "日払い申請", d: "下番の流れでそのまま申請。当日中に振り込まれます（振込手数料は本人負担）。" },
             ].map((x, i) => (
               <li key={x.t} className="grid grid-cols-[40px_1fr] gap-3 rounded-sm border border-line bg-bg p-4">
                 <span className="num flex h-9 w-9 items-center justify-center rounded-full border-2 border-accent text-[13px] font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>

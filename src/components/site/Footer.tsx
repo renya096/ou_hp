@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/primitives";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "./Logo";
+import { Hyoshiki } from "./Hyoshiki";
 import { footerLinks, site } from "@/content/site";
 
 /** 全ページ共通フッター。認定（標識）・住所・各事業リンク。 */
@@ -25,15 +26,11 @@ export function Footer() {
               <div className="flex gap-3"><dt className="w-14 shrink-0 text-muted">警備</dt><dd className="num break-all text-ink">{site.email.security}</dd></div>
               <div className="flex gap-3"><dt className="w-14 shrink-0 text-muted">清掃</dt><dd className="num break-all text-ink">{site.email.cleaning}</dd></div>
             </dl>
-            <div className="mt-5 rounded-sm border border-line bg-bg p-4 text-[12.5px] leading-[1.7]">
-              <p className="font-bold text-heading">警備業に関する表示（警備業法第11条・標識）</p>
-              <dl className="mt-2 grid gap-0.5 text-ink">
-                <div className="flex gap-2"><dt className="w-24 shrink-0 text-muted">名称</dt><dd>{site.name}</dd></div>
-                <div className="flex gap-2"><dt className="w-24 shrink-0 text-muted">認定</dt><dd className="num">{site.license.label}</dd></div>
-                <div className="flex gap-2"><dt className="w-24 shrink-0 text-muted">業務区分</dt><dd>{site.license.categories.join("／")}</dd></div>
-                <div className="flex gap-2"><dt className="w-24 shrink-0 text-muted">認定年月日</dt><dd className="num">{site.license.certifiedOn || "（標識の交付内容を掲載予定）"}</dd></div>
-              </dl>
-              <Link href="/legal" className="mt-2 inline-flex items-center gap-1 text-[12.5px] font-semibold text-action">表示の詳細 <Icon name="arrow" size={14} /></Link>
+            <div className="mt-5">
+              <p className="mb-2 text-[12.5px] font-bold text-heading">警備業法第6条に基づく標識</p>
+              <Hyoshiki compact />
+              <p className="mt-2 text-[12px] text-muted">業務区分：{site.license.categories.join("／")}</p>
+              <Link href="/legal" className="mt-1 inline-flex items-center gap-1 text-[12.5px] font-semibold text-action">警備業に関する表示 <Icon name="arrow" size={14} /></Link>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4">

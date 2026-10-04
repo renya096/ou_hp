@@ -159,5 +159,7 @@ details.faq[open] .faq-icon { transform: rotate(45deg); }
 .js .rule[data-reveal=""] { width: 0; }
 
 /* ロゴ：ダーク面では白版に切り替え */
+/* テーマ切替の内側では継承色を再評価する（body の color は外側で解決されるため、明示しないと暗色テーマで本文が黒のまま残る） */
+[data-theme] { color: var(--ink); }
 [data-theme="protect"] .logo-light { display: none; }
 [data-theme="protect"] .logo-dark { display: block; }

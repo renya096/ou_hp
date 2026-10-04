@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featuredWorks = works.slice(0, 3);
+  const featuredWorks = ["earthquake-2026", "house-maker-sites", "lifeline-emergency-works"].map((slug) => works.find((w) => w.slug === slug)!).filter(Boolean);
   const latestNews = news.slice(0, 3);
 
   return (

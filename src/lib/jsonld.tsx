@@ -37,7 +37,9 @@ export function organizationJsonLd() {
     openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "00:00", closes: "23:59" },
     areaServed: [{ "@type": "State", name: "熊本県" }, { "@type": "Country", name: "日本" }],
     numberOfEmployees: { "@type": "QuantitativeValue", value: site.stats.guards },
-    identifier: { "@type": "PropertyValue", propertyID: "警備業認定番号", value: site.license.number, description: `${site.license.authority}認定` },
+    identifier: { "@type": "PropertyValue", propertyID: "警備業認定番号", value: site.license.number, description: `${site.license.authority}認定（認定年月日 ${site.license.certifiedOnISO}、有効期間 ${site.license.certifiedOnISO}〜${site.license.validUntilISO}）` },
+    hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "警備業認定（警備業法第4条）", name: site.license.label, recognizedBy: { "@type": "GovernmentOrganization", name: site.license.authority }, validFrom: site.license.certifiedOnISO, validUntil: site.license.validUntilISO },
+    memberOf: site.memberships.map((m) => ({ "@type": "Organization", name: m.name, url: m.url })),
     additionalType: "https://ja.wikipedia.org/wiki/警備業",
     sameAs: [site.line.business],
     contactPoint: [
