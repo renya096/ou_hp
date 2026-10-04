@@ -34,7 +34,7 @@ export default function ProtectionPage() {
 
       <PageHero
         eyebrow="Protection — 身辺警備業務（4号）"
-        title={<span className="font-serif font-medium">身辺警護（4号警備・ボディガード）</span>}
+        title={<span className="font-serif font-medium"><span className="inline-block">身辺警護</span><span className="inline-block">（4号警備・</span><span className="inline-block">ボディガード）</span></span>}
         lead={definitions.protection}
         chips={["警備業法第2条第1項第4号", `${site.protectionStart}開始`, `警護員${site.stats.protectionTeam}名（${site.stats.asOf}）`, "全国対応（出張）", "English support"]}
       >

@@ -26,45 +26,50 @@ export function Header() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
+  // short: 幅の狭いスマホ（〜639px）用の短い文言。折り返しを防ぐ
   const cta = isProtect
-    ? { href: "/protection/contact", label: "相談する" }
+    ? { href: "/protection/contact", label: "相談する", short: "相談する" }
     : isRecruit
-      ? { href: "/recruit/entry", label: "応募する" }
+      ? { href: "/recruit/entry", label: "応募する", short: "応募する" }
       : isClean
-        ? { href: "/cleaning/contact", label: "現地確認を依頼" }
-        : { href: "/contact", label: "見積・お問い合わせ" };
+        ? { href: "/cleaning/contact", label: "現地確認を依頼", short: "現地確認" }
+        : { href: "/contact", label: "見積・お問い合わせ", short: "お問い合わせ" };
 
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-bg/92 backdrop-blur supports-[backdrop-filter]:bg-bg/80" data-theme={isProtect ? "protect" : isClean ? "clean" : isRecruit ? "recruit" : undefined}>
       <Container className="flex h-16 items-center justify-between gap-4">
         <Logo id="ou-header" />
-        <nav aria-label="メイン" className="hidden lg:block">
+        {/* フルナビは 1280px 以上。1024〜1279px はロゴ＋電話＋CTA＋メニューで項目の折り返しを防ぐ */}
+        <nav aria-label="メイン" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {nav.map((n) => {
               const active = pathname === n.href || pathname.startsWith(n.href + "/");
               return (
                 <li key={n.href}>
-                  <Link href={n.href} className={cx("relative inline-flex h-16 items-center px-3.5 text-[14px] font-semibold text-ink/85 hover:text-heading", active && "text-heading after:absolute after:inset-x-3.5 after:bottom-0 after:h-0.5 after:bg-engi")} aria-current={active ? "page" : undefined}>{n.label}</Link>
+                  <Link href={n.href} className={cx("relative inline-flex h-16 items-center whitespace-nowrap px-3.5 text-[14px] font-semibold text-ink/85 hover:text-heading", active && "text-heading after:absolute after:inset-x-3.5 after:bottom-0 after:h-0.5 after:bg-engi")} aria-current={active ? "page" : undefined}>{n.label}</Link>
                 </li>
               );
             })}
           </ul>
         </nav>
-        <div className="flex items-center gap-2">
-          <a href={`tel:${site.tel.replace(/-/g, "")}`} className="hidden items-center gap-2 text-ink md:inline-flex">
+        <div className="flex shrink-0 items-center gap-2">
+          <a href={`tel:${site.tel.replace(/-/g, "")}`} className="hidden items-center gap-2 whitespace-nowrap text-ink md:inline-flex">
             <Icon name="phone" size={18} className="text-accent" />
             <span className="flex flex-col leading-none">
               <span className="num text-[16px] font-bold tracking-tight">{site.telDisplay}</span>
               <span className="num mt-0.5 text-[10px] text-muted">24時間受付・緊急対応可</span>
             </span>
           </a>
-          <Link href={cta.href} className="inline-flex min-h-[40px] items-center justify-center rounded-full bg-ink px-4 text-[13.5px] font-bold text-bg hover:bg-navy sm:min-h-[42px] sm:px-5">{cta.label}</Link>
-          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "メニューを閉じる" : "メニューを開く"} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-ink lg:hidden">
+          <Link href={cta.href} className="inline-flex min-h-[40px] items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 text-[13.5px] font-bold text-bg hover:bg-navy sm:min-h-[42px] sm:px-5">
+            <span className="sm:hidden">{cta.short}</span>
+            <span className="hidden sm:inline">{cta.label}</span>
+          </Link>
+          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="mobile-nav" aria-label={open ? "メニューを閉じる" : "メニューを開く"} className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-ink xl:hidden">
             <Icon name={open ? "close" : "menu"} size={22} />
           </button>
         </div>
       </Container>
-      <div id="mobile-nav" hidden={!open} className="border-t border-line bg-bg lg:hidden">
+      <div id="mobile-nav" hidden={!open} className="border-t border-line bg-bg xl:hidden">
         <Container className="py-4">
           <ul className="grid">
             {nav.map((n) => (

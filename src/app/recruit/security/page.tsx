@@ -57,7 +57,7 @@ export default function RecruitSecurityPage() {
       {/* FV */}
       <PageHero
         eyebrow="Recruit — 警備スタッフ"
-        title="警備スタッフ（交通誘導・雑踏警備）"
+        title={<><span className="inline-block">警備スタッフ</span><span className="inline-block">（交通誘導・</span><span className="inline-block">雑踏警備）</span></>}
         lead={<>家から現場へ。現場から家へ。会社に寄る必要はありません。出退勤はLINE、日払いもLINEから申請して当日中に振込。隊員{site.stats.guards}名の平均年齢は{site.stats.averageAge}歳（{site.stats.asOf}）、警備の経験がない人のほうが多い会社です。</>}
         chips={[recruitFacts.dailyWageLabel, "日払い申請・当日振込", "直行直帰", "社会保険あり", "寮あり（遠方の方）", "研修中も給与あり", "18歳以上"]}
       >
