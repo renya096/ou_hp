@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <g transform="translate(61.44,140.17498327759196) scale(1.3014046822742475)"><mask id="cuti" maskUnits="userSpaceOnUse" x="0" y="0" width="299" height="178"><rect width="299" height="178" fill="#fff"/><circle cx="89" cy="89" r="75.5" fill="none" stroke="#000" stroke-width="43"/></mask>
+  <path d="M 162.5 3 V 103 A 61.5 61.5 0 0 0 285.5 103 V 3" fill="none" stroke="#182253" stroke-width="27" mask="url(#cuti)"/>
+  <circle cx="89" cy="89" r="75.5" fill="none" stroke="#182253" stroke-width="27"/></g>
+</svg>

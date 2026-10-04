@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 178" width="299" height="178" role="img" aria-label="OU">
+  <defs>
+    <mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="299" height="178">
+      <rect width="299" height="178" fill="#fff"/>
+      <circle cx="89" cy="89" r="75.5" fill="none" stroke="#000" stroke-width="43"/>
+    </mask>
+  </defs>
+  
+  <path d="M 162.5 3 V 103 A 61.5 61.5 0 0 0 285.5 103 V 3" fill="none" stroke="#ffffff" stroke-width="27" mask="url(#cut)"/>
+  <circle cx="89" cy="89" r="75.5" fill="none" stroke="#ffffff" stroke-width="27"/>
+</svg>

@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — OU警備保障
+  Base: Civic Navy（公共の青）。Accent: エンジ（臙脂）— 陸上自衛隊少年工科学校のイメージカラー。
+  Themes switch with [data-theme]: guard (default) / protect (4号・dark) / clean / recruit.
+*/
+:root {
+  --bg: #f7f7f5;
+  --surface: #ededea;
+  --surface-2: #e3e4df;
+  --card: #ffffff;
+  --ink: #0e1522;
+  --muted: #646b78;
+  --line: #d9dbe0;
+  --navy: #182253;
+  --heading: #182253;
+  --action: #182253;
+  --action-ink: #ffffff;
+  --action-hover: #0e1522;
+  --engi: #9b2335;
+  --accent: #9b2335;
+  --logo: #182253;
+  --accent-soft: #f6e9ec;
+  --focus: #1d5fd1;
+  --radius: 14px;
+  --header-h: 64px;
+}
+
+[data-theme="protect"] {
+  --bg: #0b1220;
+  --surface: #111a2b;
+  --surface-2: #182338;
+  --card: #111a2b;
+  --ink: #e8edf5;
+  --muted: #9fb3c8;
+  --line: #22304a;
+  --navy: #c9d8ee;
+  --heading: #f2f5fa;
+  --action: #e8edf5;
+  --action-ink: #0b1220;
+  --action-hover: #ffffff;
+  --accent: #b8955a;
+  --accent-soft: #1f2436;
+  --logo: #ffffff;
+  --focus: #9fb3c8;
+  color-scheme: dark;
+}
+
+[data-theme="clean"] {
+  --surface: #f1efe9;
+  --surface-2: #e8e5dc;
+  --accent: #2e7d5b;
+  --accent-soft: #e6f2ec;
+}
+
+[data-theme="recruit"] {
+  --surface: #f3f6fa;
+  --accent: #1d5fd1;
+  --accent-soft: #e6eefb;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-heading: var(--heading);
+  --color-action: var(--action);
+  --color-action-ink: var(--action-ink);
+  --color-action-hover: var(--action-hover);
+  --color-engi: var(--engi);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-noto), "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  --font-num: var(--font-archivo), var(--font-noto), system-ui, sans-serif;
+  --font-serif: var(--font-shippori), "Hiragino Mincho ProN", serif;
+  --radius-sm: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  color: var(--heading);
+  line-height: 1.3;
+  text-wrap: balance;
+  font-feature-settings: "palt";
+  letter-spacing: -0.015em;
+}
+
+p { text-wrap: pretty; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+
+/* Reveal: visible at rest, animates in only when JS marks it */
+.reveal { opacity: 1; transform: none; }
+.js .reveal[data-reveal] { opacity: 0; transform: translateY(8px); transition: opacity .3s ease-out, transform .3s ease-out; }
+.js .reveal[data-reveal="in"] { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal[data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Stepper line */
+.step-line { background: linear-gradient(var(--line), var(--line)) no-repeat left top / 2px 0; transition: background-size .6s ease-out; }
+.step-line[data-reveal="in"] { background-size: 2px 100%; }
+
+/* details/summary FAQ */
+details.faq > summary { list-style: none; cursor: pointer; }
+details.faq > summary::-webkit-details-marker { display: none; }
+details.faq[open] .faq-icon { transform: rotate(45deg); }
+.faq-icon { transition: transform .2s ease-out; }
+
+/* Safe-area for fixed bars */
+.safe-bottom { padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px)); }
+
+/* grid の子は内容幅で押し広げない（表・長文の横はみ出し防止） */
+.grid > * { min-width: 0; }
+
+/* Kinetic word reveal（見出し用）：行ごとに下から立ち上がる */
+.kw { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .06em; }
+.kw > span { display: inline-block; }
+.js .kw[data-reveal] > span { transform: translateY(110%); transition: transform .9s cubic-bezier(.2,.8,.2,1); }
+.js .kw[data-reveal="in"] > span { transform: none; }
+@media (prefers-reduced-motion: reduce) { .js .kw[data-reveal] > span { transform: none; transition: none; } }
+
+/* マーキー（サービス名の帯） */
+.marquee { overflow: hidden; white-space: nowrap; }
+.marquee > div { display: inline-block; animation: marquee 36s linear infinite; }
+.marquee:hover > div { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee > div { animation: none; } }
+
+/* 細い線が伸びる（eyebrow） */
+.rule { display: inline-block; height: 1px; width: 48px; background: var(--engi); vertical-align: middle; transition: width 1.1s cubic-bezier(.7,0,.2,1); }
+.js .rule[data-reveal=""] { width: 0; }
+
+/* ロゴ：ダーク面では白版に切り替え */
+[data-theme="protect"] .logo-light { display: none; }
+[data-theme="protect"] .logo-dark { display: block; }

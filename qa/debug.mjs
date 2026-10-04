@@ -1,0 +1,13 @@
+import { chromium } from "/opt/npm-tools/node_modules/playwright/index.mjs";
+const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome", args: ["--no-proxy-server", "--no-sandbox"] });
+const pg = await b.newPage({ viewport: { width: 1366, height: 900 } });
+pg.on("console", m => console.log("console:", m.type(), m.text()));
+pg.on("pageerror", e => console.log("pageerror:", e.message));
+await pg.goto("http://127.0.0.1:3100/", { waitUntil: "networkidle" });
+console.log("js class:", await pg.evaluate(() => document.documentElement.className));
+console.log("reveal states before:", await pg.evaluate(() => [...document.querySelectorAll(".reveal")].map(e => e.dataset.reveal)));
+await pg.evaluate(() => document.querySelector("ol.step-line")?.scrollIntoView());
+await pg.waitForTimeout(800);
+console.log("reveal states after:", await pg.evaluate(() => [...document.querySelectorAll(".reveal")].map(e => e.dataset.reveal)));
+console.log("hydrated?", await pg.evaluate(() => !!document.querySelector("[data-reveal]") && typeof window.__next_f !== "undefined"));
+await b.close();
