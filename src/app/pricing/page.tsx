@@ -8,7 +8,7 @@ import { site, definitions } from "@/content/site";
 
 const path = "/pricing";
 const title = "警備料金の考え方｜設計労務単価を基準に算定";
-const description = "熊本の警備料金はどう決まるのか。1名1日単価×人数×時間帯×資格者×曜日×期間の算定方法、公共工事設計労務単価（熊本県 交通誘導警備員A 17,700円／B 15,500円）との関係、割増・中止時の考え方、身辺警護と清掃の料金の考え方を公開しています。";
+const description = "熊本の警備料金はどう決まるのか。1名1日単価×人数×時間帯×資格者×曜日×期間の算定方法、当社の基準単価（交通誘導警備員B 17,000円〜／A 19,400円〜）と公共工事設計労務単価（熊本県 交通誘導警備員A 17,700円／B 15,500円）との関係、割増・中止時の考え方、身辺警護と清掃の料金の考え方を公開しています。";
 
 export const metadata: Metadata = {
   title,
@@ -30,9 +30,10 @@ const factors = [
 ];
 
 /** ② 公共工事設計労務単価（出典：国土交通省） */
+const yen = (n: number) => `${n.toLocaleString("ja-JP")}円`;
 const laborRates = [
-  { grade: "交通誘導警備員A", rate: "17,700円", who: "交通誘導警備業務検定（1級・2級）の資格者。資格者配置路線・高速道路・国道の規制で指定されることが多い区分。" },
-  { grade: "交通誘導警備員B", rate: "15,500円", who: "検定資格を持たない警備員。一般の建築・土木現場、駐車場誘導、イベントなど。" },
+  { grade: "交通誘導警備員A", rate: yen(site.rates.laborA), base: yen(site.rates.baseA), who: "交通誘導警備業務検定（1級・2級）の資格者。資格者配置路線・高速道路・国道の規制で指定されることが多い区分。" },
+  { grade: "交通誘導警備員B", rate: yen(site.rates.laborB), base: yen(site.rates.baseB), who: "検定資格を持たない警備員。一般の建築・土木現場、駐車場誘導、イベントなど。" },
 ];
 
 /** 単価に含まれるもの（採用ページの日給との差の説明） */
@@ -129,16 +130,17 @@ export default function PricingPage() {
 
       {/* ② 公共工事設計労務単価 */}
       <Section tone="surface" eyebrow="02 — Benchmark" title="公共工事設計労務単価を基準にしています" lead="国土交通省が毎年公表する公共工事設計労務単価は、公共工事の積算に使われる職種別・都道府県別の1日あたり単価です。私たちの見積は、この単価を基準に算定しています。元請・公共工事の積算と整合する見積書式での提示も可能です。">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+        <div className="grid gap-6">
           <div>
-            <h3 className="mb-3 text-[17px] font-bold">熊本県の交通誘導警備員の単価（令和8年3月適用）</h3>
+            <h3 className="mb-3 text-[17px] font-bold">当社の基準単価と、公共工事設計労務単価（熊本県・令和8年3月適用）</h3>
             <div className="overflow-x-auto rounded-sm border border-line">
-              <table className="w-full min-w-[520px] border-collapse text-left text-[14.5px]">
+              <table className="w-full min-w-[640px] border-collapse text-left text-[14.5px]">
                 <caption className="sr-only">令和8年3月適用 公共工事設計労務単価（熊本県・交通誘導警備員）</caption>
                 <thead className="bg-bg text-[13px] text-muted">
                   <tr>
                     <th scope="col" className="px-4 py-3 font-semibold">区分</th>
-                    <th scope="col" className="px-4 py-3 font-semibold">1日あたり</th>
+                    <th scope="col" className="whitespace-nowrap px-4 py-3 font-semibold">当社の基準単価<span className="block text-[11px] font-normal">1名1日・日中8時間の目安</span></th>
+                    <th scope="col" className="whitespace-nowrap px-4 py-3 font-semibold">設計労務単価<span className="block text-[11px] font-normal">国交省・熊本県</span></th>
                     <th scope="col" className="px-4 py-3 font-semibold">対象</th>
                   </tr>
                 </thead>
@@ -146,14 +148,15 @@ export default function PricingPage() {
                   {laborRates.map((r) => (
                     <tr key={r.grade} className="align-top">
                       <th scope="row" className="whitespace-nowrap px-4 py-3.5 font-bold text-heading">{r.grade}</th>
-                      <td className="num whitespace-nowrap px-4 py-3.5 text-[17px] font-semibold text-heading">{r.rate}</td>
+                      <td className="num whitespace-nowrap px-4 py-3.5 text-[17px] font-semibold text-heading">{r.base}<span className="ml-0.5 text-[12px] font-normal text-muted">〜</span></td>
+                      <td className="num whitespace-nowrap px-4 py-3.5 text-[15px] text-muted">{r.rate}</td>
                       <td className="px-4 py-3.5 leading-[1.8] text-ink">{r.who}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-2 text-[12.5px] text-muted">出典：国土交通省「令和8年3月から適用する公共工事設計労務単価」（熊本県）。所定労働時間内8時間あたりの単価で、時間外・休日・深夜の割増や、法定福利費の事業主負担分などは含まれていません。</p>
+            <p className="mt-2 text-[12.5px] text-muted">当社の基準単価は日中8時間・平日の目安で、夜間・日曜祝日・短時間・遠方・急な依頼は割増、長期継続は別途ご提案します。設計労務単価の出典：国土交通省「令和8年3月から適用する公共工事設計労務単価」（熊本県）。所定労働時間内8時間あたりの単価で、時間外・休日・深夜の割増や、法定福利費の事業主負担分などは含まれていません。</p>
           </div>
           <Note title="この金額は「請求額」ではなく「基準」です" tone="accent">
             設計労務単価は、警備員本人に支払われる賃金の水準を示すものです。私たちの見積単価は、これを基準に、下の表にある会社負担の費用を加えて算定します。そのため、設計労務単価そのものや、採用ページの日給とは金額が異なります。

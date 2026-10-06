@@ -127,7 +127,7 @@ export default function HomePage() {
         <div className="mt-10 rounded-sm border border-line bg-surface p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
           <div>
             <p className="text-[16px] font-bold text-heading">料金の考え方を公開しています</p>
-            <p className="mt-1 text-[14px] text-muted">公共工事設計労務単価（熊本県 交通誘導警備員A 17,700円／B 15,500円）を基準に、人数・時間帯・資格者配置で算定します。</p>
+            <p className="mt-1 text-[14px] text-muted">基準単価は交通誘導警備員B 17,000円〜／A（検定資格者）19,400円〜（1名1日・日中8時間の目安）。公共工事設計労務単価（熊本県）を基準に、人数・時間帯・資格者配置で算定します。</p>
           </div>
           <Button href="/pricing" variant="secondary" className="mt-4 shrink-0 sm:mt-0">料金の考え方 <Icon name="arrow" size={16} /></Button>
         </div>

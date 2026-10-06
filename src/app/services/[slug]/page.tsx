@@ -76,8 +76,8 @@ export default async function GuardServicePage({ params }: { params: Promise<{ s
 
       <Section eyebrow="Pricing" title="料金の考え方" lead="警備員1名1日あたりの単価を基本に、人数・時間帯・資格者配置・曜日・期間で算定します。">
         <div className="grid gap-6 lg:grid-cols-[1fr_320px] lg:items-start">
-          <Note title="公共工事設計労務単価を基準に積算しています">
-            国土交通省の令和8年3月適用 公共工事設計労務単価（熊本県）は、交通誘導警備員A（検定資格者）17,700円、同B 15,500円です。当社の見積は、この単価を基準に社会保険・教育・装備・管制の費用を含めて算定します。夜間・休日・短時間・遠方の割増、中止時の規定もあわせてご説明します。
+          <Note title="基準単価の目安と、積算の考え方">
+            当社の基準単価の目安は、交通誘導警備員B 17,000円〜、交通誘導警備員A（検定資格者）19,400円〜（1名1日・日中8時間）です。国土交通省の令和8年3月適用 公共工事設計労務単価（熊本県 A 17,700円／B 15,500円）を基準に、社会保険・教育・装備・管制の費用を含めて算定しています。夜間・休日・短時間・遠方の割増、中止時の規定もあわせてご説明します。
           </Note>
           <Button href="/pricing" variant="secondary" size="lg" className="w-full">料金の考え方を詳しく見る <Icon name="arrow" size={18} /></Button>
         </div>
