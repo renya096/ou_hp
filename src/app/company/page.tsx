@@ -5,7 +5,7 @@ import { PageHero, Breadcrumbs, StatTiles, ContactBand } from "@/components/ui/b
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { site, definitions } from "@/content/site";
-import { timeline } from "@/content/news";
+import { timeline, mediaCoverage } from "@/content/news";
 
 const path = "/company";
 const title = "会社概要｜熊本市の警備会社（2号・4号警備）株式会社OU警備保障";
@@ -109,8 +109,23 @@ export default function CompanyPage() {
         </div>
       </Section>
 
+      {/* メディア掲載 */}
+      <Section eyebrow="Media" title="メディア掲載">
+        <ul className="grid gap-3">
+          {mediaCoverage.map((m) => (
+            <li key={m.slug}>
+              <Link href={`/news/${m.slug}`} className="grid gap-1 rounded-sm border border-line bg-bg p-5 transition-colors hover:border-ink sm:grid-cols-[110px_150px_1fr] sm:items-baseline sm:gap-4">
+                <time dateTime={m.date} className="num text-[13px] text-muted">{m.date.replace(/-/g, ".")}</time>
+                <span className="text-[13.5px] font-bold text-heading">{m.media}</span>
+                <span className="text-[15px] font-bold text-ink">{m.title}<span className="mt-0.5 block text-[13px] font-normal text-muted">{m.note}</span></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       {/* 沿革 */}
-      <Section eyebrow="History" title="沿革">
+      <Section tone="surface" eyebrow="History" title="沿革">
         <ol className="grid gap-0 border-l-2 border-line">
           {timeline.map((t) => (
             <li key={t.date} className="grid grid-cols-[88px_1fr] gap-4 pb-6 pl-5 last:pb-0 sm:grid-cols-[120px_1fr]">
@@ -123,7 +138,7 @@ export default function CompanyPage() {
       </Section>
 
       {/* 行動指針 */}
-      <Section tone="surface" eyebrow="Principles" title="行動指針" lead={`ミッションは「${site.mission}」。現場でどう動くかを、5つの言葉で決めています。`}>
+      <Section eyebrow="Principles" title="行動指針" lead={`ミッションは「${site.mission}」。現場でどう動くかを、5つの言葉で決めています。`}>
         <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {site.principles.map((p, i) => (
             <li key={p.title} className="rounded-sm border border-line bg-bg p-5">
@@ -137,7 +152,7 @@ export default function CompanyPage() {
       </Section>
 
       {/* アクセス */}
-      <Section eyebrow="Access" title="アクセス">
+      <Section tone="surface" eyebrow="Access" title="アクセス">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
           <div>
             <p className="num text-[16px] font-semibold text-heading">{site.address.full}</p>

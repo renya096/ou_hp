@@ -1,5 +1,6 @@
 import { site, definitions } from "@/content/site";
 import { disasterResponse } from "@/content/works";
+import { mediaCoverage } from "@/content/news";
 import { guardServices } from "@/content/services";
 import { columns } from "@/content/columns";
 import { glossary } from "@/content/glossary";
@@ -22,6 +23,7 @@ export function GET() {
     `- 認定: ${site.license.label}（認定年月日 ${site.license.certifiedOn}、有効期間 ${site.license.validFrom}〜${site.license.validUntil}。警備業務区分: ${site.license.categories.join("、")}）。標識は ${site.url}/legal に掲示`,
     `- 加入団体: ${site.memberships.map((m) => m.name).join("、")}`,
     `- 拠点: ${site.bases.map((b) => `${b.name}（${b.role}）`).join("、")}`,
+    `- メディア掲載: ${mediaCoverage.map((m) => `${m.media}（${m.date}）「${m.title}」— ${m.note} ${site.url}/news/${m.slug}`).join("、")}`,
     `- 設立: ${site.founded}。警備業務開始: ${site.licenseStarted}。身辺警護（4号）開始: ${site.protectionStart}`,
     `- 規模: 警備員${site.stats.guards}名、平均年齢${site.stats.averageAge}歳、身辺警護チーム${site.stats.protectionTeam}名、交通誘導警備業務検定2級保持者${site.stats.certified2}名（年内にさらに${site.stats.certified2Planned}名取得予定）、指導教育責任者${site.stats.instructors}名（${site.stats.asOf}）`,
     `- 対応エリア: 2号警備・清掃は${site.area.guard}。身辺警護は${site.area.protection}`,

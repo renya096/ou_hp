@@ -32,6 +32,7 @@ const related: Record<string, { href: string; label: string }> = {
   実績: { href: "/works", label: "実績・対応事例" },
   採用: { href: "/recruit", label: "採用情報" },
   お知らせ: { href: "/company", label: "会社概要" },
+  メディア掲載: { href: "/works", label: "実績・対応事例" },
 };
 
 export default async function NewsArticlePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -63,7 +64,19 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
         </header>
         <Section>
           <div className="mx-auto grid max-w-[68ch] gap-6 text-[15.5px] leading-[2] text-ink">
+            {n.image && (
+              <figure className="m-0 rounded-sm border border-line bg-surface p-3 sm:p-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={n.image.src} alt={n.image.alt} width={n.image.width} height={n.image.height} loading="lazy" className="block h-auto w-full rounded-[6px] bg-white" />
+                <figcaption className="mt-2 text-[12.5px] text-muted">{n.image.caption}</figcaption>
+              </figure>
+            )}
             {n.body.map((p, i) => <p key={i}>{p}</p>)}
+            {n.links && n.links.length > 0 && (
+              <ul className="grid gap-2 text-[14.5px] font-bold text-action">
+                {n.links.map((l) => <li key={l.href}><Link href={l.href} className="inline-flex items-center gap-1">{l.label} <Icon name="arrow" size={16} /></Link></li>)}
+              </ul>
+            )}
             {rel && (
               <div className="mt-4 rounded-sm border border-line bg-surface p-5 sm:flex sm:items-center sm:justify-between sm:gap-6">
                 <p className="text-[14.5px] font-bold text-heading">関連ページ：{rel.label}</p>
