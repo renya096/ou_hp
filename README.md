@@ -2,6 +2,10 @@
 
 Next.js 16（App Router）＋ TypeScript ＋ Tailwind CSS v4。2号警備（交通誘導・雑踏・道路規制）、4号警備（身辺警護）、OUクリーンサービス、採用の4領域を1サイトに統合。
 
+## フォント
+
+フォントは Fontsource パッケージで自己ホスト（`@fontsource-variable/noto-sans-jp` / `@fontsource-variable/archivo` / `@fontsource/shippori-mincho-b1`）。ビルド時に Google Fonts へ接続しないため、`scripts/font-mock.js` は不要になった（残してあるが未使用）。
+
 ## セットアップ
 
 ```bash

@@ -6,6 +6,10 @@
   Themes switch with [data-theme]: guard (default) / protect (4号・dark) / clean / recruit.
 */
 :root {
+  /* 自己ホストのフォント（Fontsource）。layout.tsx で CSS を読み込む */
+  --font-noto: "Noto Sans JP Variable";
+  --font-archivo: "Archivo Variable";
+  --font-shippori: "Shippori Mincho B1";
   --bg: #f7f7f5;
   --surface: #ededea;
   --surface-2: #e3e4df;

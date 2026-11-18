@@ -1,15 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_JP, Archivo, Shippori_Mincho_B1 } from "next/font/google";
+// フォントは自己ホスト（Fontsource）。ビルド時に Google Fonts へ取りに行かないので、外部障害でビルドが落ちない
+import "@fontsource-variable/noto-sans-jp";
+import "@fontsource-variable/archivo";
+import "@fontsource/shippori-mincho-b1/500.css";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StickyCta } from "@/components/site/StickyCta";
 import { JsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
 import { site } from "@/content/site";
-
-const noto = Noto_Sans_JP({ weight: ["400", "500", "700", "900"], subsets: ["latin"], display: "swap", variable: "--font-noto", preload: false });
-const archivo = Archivo({ weight: ["500", "700", "900"], subsets: ["latin"], display: "swap", variable: "--font-archivo" });
-const shippori = Shippori_Mincho_B1({ weight: ["500"], subsets: ["latin"], display: "swap", variable: "--font-shippori", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -35,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={`${noto.variable} ${archivo.variable} ${shippori.variable}`}>
+    <html lang="ja">
       <head>
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
