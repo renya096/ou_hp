@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Section, Button, Note } from "@/components/ui/primitives";
 import { PageHero, Breadcrumbs } from "@/components/ui/blocks";
 import { Field, Input, Textarea, ChoiceGroup, Honeypot, FormSection } from "@/components/ui/form";
+import { InquiryGate } from "@/components/ui/InquiryGate";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { sendInquiry } from "@/lib/actions";
@@ -44,6 +45,7 @@ export default function ContactPage() {
           <form action={sendInquiry} data-hide-sticky className="grid gap-6">
             <input type="hidden" name="kind" value="guard" />
             <Honeypot />
+            <InquiryGate recruitHref="/recruit">
 
             <FormSection step="01" title="案件について">
               <Field label="警備の種類" name="service" required>
@@ -114,6 +116,7 @@ export default function ContactPage() {
               <p className="text-[13px] text-muted">営業時間内は原則30分以内に一次回答します。</p>
               <Button size="lg"><Icon name="doc" size={20} />この内容で見積を依頼する</Button>
             </div>
+            </InquiryGate>
           </form>
 
           <aside className="grid gap-4 lg:sticky lg:top-24">

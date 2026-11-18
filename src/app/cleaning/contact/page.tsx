@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section, Button, Note } from "@/components/ui/primitives";
 import { PageHero, Breadcrumbs } from "@/components/ui/blocks";
 import { Field, Input, Textarea, Select, ChoiceGroup, Honeypot, FormSection } from "@/components/ui/form";
+import { InquiryGate } from "@/components/ui/InquiryGate";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { sendInquiry } from "@/lib/actions";
@@ -43,6 +44,7 @@ export default function CleaningContactPage() {
           <form action={sendInquiry} data-hide-sticky className="grid gap-6">
             <input type="hidden" name="kind" value="cleaning" />
             <Honeypot />
+            <InquiryGate recruitHref="/recruit/cleaning">
 
             <FormSection step="01" title="清掃の内容">
               <Field label="対象" name="target" required>
@@ -108,6 +110,7 @@ export default function CleaningContactPage() {
               <p className="text-[13px] text-muted">送信後、担当からご連絡します。営業時間内は原則30分以内に一次回答します。</p>
               <Button size="lg"><Icon name="doc" size={20} />この内容で現地確認を依頼する</Button>
             </div>
+            </InquiryGate>
           </form>
 
           <aside className="grid gap-4 lg:sticky lg:top-24">

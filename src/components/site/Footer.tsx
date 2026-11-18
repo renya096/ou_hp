@@ -44,7 +44,8 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-[12.5px] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <p className="mt-10 border-t border-line pt-5 text-[12px] leading-[1.7] text-muted">商品・サービスの営業を目的としたご連絡（電話・フォーム・メール）はお断りしています。ご提案は郵送でのみお受けします。</p>
+        <div className="mt-4 flex flex-col gap-3 text-[12.5px] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p className="num">© {new Date().getFullYear()} {site.name}</p>
           <p>{site.slogan} — {site.mission}</p>
         </div>
